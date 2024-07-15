@@ -1,0 +1,11 @@
+{
+  "appId": "com.myflashcardapp",
+  "appName": "My Flashcard App",
+  "bundledWebRuntime": true,
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

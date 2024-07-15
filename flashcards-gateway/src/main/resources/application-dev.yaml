@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: flashcards-gateway
+    localhost: localhost
+  cloud:
+    host:
+      name: localhost
+  config:
+    activate:
+      on-profile: dev
+server:
+  port: '9676'
+local:
+  server:
+    hostname: localhost
+flashcardSet:
+  uri: flashcardset-service
+  port: '9677'
+flashcard:
+  uri: flashcard-service
+  host: localhost
+  port: '9678'
+  path:
+    root: /flashcards
+    getAll: /get-all
+    name: /get-by-name
+    flashcardId: /get-by-id
+#okta:
+#  oauth2:
+#    issuer: '""'
+logging:
+  level:
+    web: DEBUG
+#  file:
+#    name: flashcards-gateway.log
+#    max-size: 5MB
+#    max-history: '10'
+#  pattern:
+#    console: '%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n'

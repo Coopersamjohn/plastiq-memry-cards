@@ -1,0 +1,150 @@
+package com.flashcardsetservice.model.dto;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.UUID;
+
+public class FlashcardSetDto {
+
+    private UUID id;
+    private String name;
+    private String description;
+    private HashSet<FlashcardDto> flashcardDtos;
+
+    public FlashcardSetDto(
+            UUID id,
+            String name,
+            String description,
+            HashSet<FlashcardDto> flashcardDtos
+    ) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.flashcardDtos = flashcardDtos;
+    }
+
+    public static FlashcardSetDto generateUUID(
+            String name,
+            String description,
+            HashSet<FlashcardDto> flashcards
+    ) {
+        return new FlashcardSetDto(
+                UUID.randomUUID(),
+                name,
+                description,
+                flashcards
+        );
+    }
+
+    public static FlashcardSetDto noCards(
+            String name,
+            String description
+    ) {
+        return FlashcardSetDto.generateUUID(
+                name,
+                description,
+                new HashSet<FlashcardDto>()
+        );
+    }
+
+    public static FlashcardSetDto withCardsNoDescription(
+            String name,
+            HashSet<FlashcardDto> flashcards
+    ) {
+        return FlashcardSetDto.generateUUID(
+                name,
+                "",
+                flashcards
+        );
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setFlashcardDtos(HashSet<FlashcardDto> flashcardDtos) {
+        this.flashcardDtos = flashcardDtos;
+    }
+
+    public HashSet<FlashcardDto> getFlashcardDtos() {
+        return flashcardDtos;
+    }
+
+    public HashSet<FlashcardDto> addFlashcard(FlashcardDto flashcard) {
+
+		this.flashcardDtos.add(flashcard);
+        return this.flashcardDtos;
+	}
+
+	public HashSet<FlashcardDto> addFlashcards(HashSet<FlashcardDto> flashcards) {
+
+		this.flashcardDtos.addAll(flashcards);
+        return this.flashcardDtos;
+	}
+
+	public HashSet<FlashcardDto> removeFlashcard(FlashcardDto flashcard) {
+
+		this.flashcardDtos.remove(flashcard);
+        return this.flashcardDtos;
+	}
+
+	public HashSet<FlashcardDto> removeFlashcards(HashSet<FlashcardDto> flashcards) {
+
+		this.flashcardDtos.remove(flashcards);
+		return this.flashcardDtos;
+	}
+
+	public HashSet<FlashcardDto> removeFlashcardById(UUID flashcardId) {
+
+		this.flashcardDtos.removeIf((FlashcardDto flashcard) -> {
+            return flashcardId.equals(flashcard.getFlashcardSetId());
+        });
+		return this.flashcardDtos;
+	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FlashcardSetDto)) return false;
+        FlashcardSetDto that = (FlashcardSetDto) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(flashcardDtos, that.flashcardDtos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, flashcardDtos);
+    }
+
+    @Override
+    public String toString() {
+        return "FlashcardSetDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", flashcardDtos=" + flashcardDtos +
+                '}';
+    }
+}

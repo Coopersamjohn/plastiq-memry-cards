@@ -1,0 +1,4 @@
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+mvn spring-boot:run -Dspring-boot.run.profiles=qa
+mvn spring-boot:run -Dspring-boot.run.profiles=integration
+mvn spring-boot:run -Dspring-boot.run.profiles=prod
