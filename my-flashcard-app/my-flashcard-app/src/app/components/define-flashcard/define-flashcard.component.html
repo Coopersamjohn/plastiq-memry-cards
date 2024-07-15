@@ -1,0 +1,14 @@
+<form id="flashcard-{{ i }}" [formGroup]="flashcard" (submit)="saveCard()">
+
+  <label for="name">Name:</label>
+  <input id="name" type="text" formControlName="name">
+
+  <label for="definition">Definition:</label>
+  <input id="definition" type="text" formControlName="definition">
+
+  <label for="notes">Notes:</label>
+  <input id="notes" type="text" formControlName="notes">
+
+  <button type="submit"></button>
+
+</form>

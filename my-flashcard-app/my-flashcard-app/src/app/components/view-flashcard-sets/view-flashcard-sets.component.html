@@ -1,0 +1,38 @@
+<!-- <ion-header> -->
+  <h1>Categories</h1>
+<!-- </ion-header>
+<ion-content> -->
+  <div *ngrxLet="flashCardSets$ | ngrxPush; let q; let e = $error, let c = $complete">
+
+    <div *ngIf="(q | ngrxPush)?.length > 0 && !e && !c; else noSets">
+      <div *ngFor="let flashcardSet of q">
+
+        <ion-card>
+          <h2 > {{ flashcardSet?.name }} </h2>
+          <div *ngFor="let flashcard of flashcardSet.cards; index as i; trackBy: flashcardTrackBy">
+            <app-flashcard [flashCard]="flashcard"></app-flashcard>
+          </div>
+        </ion-card>
+    
+      </div>
+    </div>
+
+    <ng-template #noSets>
+      <ion-card>
+        <ion-text>
+          No sets yets
+        </ion-text>
+      </ion-card>
+    </ng-template>
+
+    <ng-container *ngIf="e">
+      <ion-text> Some Error:: {{ e }} </ion-text>
+    </ng-container>
+
+    <!-- <ng-container *ngIf="c">
+      <ion-text> Call complete:: {{ c }} </ion-text>
+    </ng-container> -->
+
+  </div>
+
+<!-- </ion-content> -->

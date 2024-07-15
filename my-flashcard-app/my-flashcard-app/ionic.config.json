@@ -1,0 +1,7 @@
+{
+  "name": "plastiq-memry-cards",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

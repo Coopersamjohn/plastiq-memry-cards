@@ -1,2 +1,0 @@
-2024-06-14T22:36:27.119-05:00  WARN 2985 --- [flashcards-gateway] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
-2024-06-14T22:38:48.322-05:00  WARN 3073 --- [flashcards-gateway] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server

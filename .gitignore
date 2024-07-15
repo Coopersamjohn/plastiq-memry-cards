@@ -75,5 +75,5 @@ npm-debug.log*
 /plugins
 /www
 
-**.metadata
-.metadata
+**.metadata/
+.metadata/

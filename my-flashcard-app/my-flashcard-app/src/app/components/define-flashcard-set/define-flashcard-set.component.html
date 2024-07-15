@@ -1,0 +1,10 @@
+<div *ngIf="flashcardSetForm; else nothing">
+  <form [formGroup]="flashcardSetForm" (submit)="saveFlashcardSet()">
+    <ion-label for="name">Name: </ion-label>
+    <ion-input id="name" type="text" formControlName="name"></ion-input>
+    <ion-button type="submit">Save Flashcard Set</ion-button>
+  </form>
+</div>
+<ng-template #nothing>
+  <ion-text> Nothing defined yet! </ion-text>
+</ng-template>

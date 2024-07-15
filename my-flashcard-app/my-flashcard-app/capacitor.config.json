@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "plastiq-memry-cards",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
