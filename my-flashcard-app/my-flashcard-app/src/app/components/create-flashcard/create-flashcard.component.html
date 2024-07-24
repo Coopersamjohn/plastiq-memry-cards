@@ -1,13 +1,11 @@
 
 <h2>Flashcards</h2>
-<ion-button type="button" (click)="addFlashcard()">+ Add Flashcard</ion-button>
-<form [formGroup]="flashcards" (submit)="saveCards()">
+<!-- <ion-button type="button" (click)="addFlashcard()">+ Add Flashcard</ion-button> -->
+<div *ngrxLet="flashcard$ as card">
 
-  <div *ngFor="let flashcard of flashcards.controls; let i=index">
-
-    <app-define-flashcard [flashcard]="flashcard"></app-define-flashcard>
-
-  </div>
+  <app-define-flashcard [flashcard]="card"></app-define-flashcard>
 
   <ion-button type="submit">Save Cards</ion-button>
-</form>
+  
+</div>
+

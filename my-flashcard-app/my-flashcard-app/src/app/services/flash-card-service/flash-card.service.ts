@@ -57,20 +57,19 @@ export class FlashCardService {
 
   addFlashcards(flashcards: Flashcard[]) {}
 
-  createNewFlashcardSetFormGroup(): Observable<FormGroup> {
-    const newFormGroup: FormGroup = this.fb.group({
+  createNewFlashcardSetFormGroup(): FormGroup {
+    return this.fb.group({
       name: [''],
       cards: this.fb.array([])
-    });
-
-    return of(newFormGroup);
+    });;
   }
-  createFlashcardFormGroup(): Observable<FormGroup> {
-    return of(this.fb.group({
+
+  createFlashcardFormGroup(): FormGroup {
+    return this.fb.group({
       name: [''],
       definition: [''],
       notes: ['']
-    }));
+    });
   }
 
   mapFlashcardFormGroupToFlashCard(flashcardFG: FormGroup): Flashcard {

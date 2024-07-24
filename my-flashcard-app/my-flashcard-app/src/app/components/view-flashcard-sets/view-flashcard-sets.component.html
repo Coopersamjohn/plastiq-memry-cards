@@ -2,16 +2,17 @@
   <h1>Categories</h1>
 <!-- </ion-header>
 <ion-content> -->
-  <div *ngrxLet="flashCardSets$ | ngrxPush; let q; let e = $error, let c = $complete">
+  <div *ngrxLet="flashCardSets$ as sets; let e = $error, let c = $complete">
 
-    <div *ngIf="(q | ngrxPush)?.length > 0 && !e && !c; else noSets">
-      <div *ngFor="let flashcardSet of q">
+    <div *ngIf="sets.length > 0 && !e && !c; else noSets">
+      <div *ngFor="let flashcardSet of sets">
 
         <ion-card>
-          <h2 > {{ flashcardSet?.name }} </h2>
-          <div *ngFor="let flashcard of flashcardSet.cards; index as i; trackBy: flashcardTrackBy">
+          <h2 > {{ flashcardSet?.getName }} </h2>
+          <div *ngFor="let flashcard of flashcardSet.getCards; index as i; trackBy: flashcardTrackBy">
             <app-flashcard [flashCard]="flashcard"></app-flashcard>
           </div>
+          <app-create-flashcard></app-create-flashcard>
         </ion-card>
     
       </div>

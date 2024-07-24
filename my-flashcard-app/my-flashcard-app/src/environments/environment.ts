@@ -8,7 +8,7 @@ export const environment = {
   hostname: 'localhost',
   port: 4200,
   flashcardServiceHostname: 'localhost',
-  flashcardServicePort: 6751
+  flashcardServicePort: 9676
 };
 
 /*

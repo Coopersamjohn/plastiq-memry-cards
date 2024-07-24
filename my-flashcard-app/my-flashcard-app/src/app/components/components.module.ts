@@ -9,13 +9,14 @@ import { DefineFlashcardSetComponent } from "./define-flashcard-set/define-flash
 import { DefineFlashcardComponent } from "./define-flashcard/define-flashcard.component";
 import { FlashcardComponent } from "./flashcard/flashcard.component";
 import { ViewFlashcardSetsComponent } from "./view-flashcard-sets/view-flashcard-sets.component";
+import { BrowserModule } from "@angular/platform-browser";
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    IonicModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    IonicModule
   ],
   declarations: [
     FlashcardComponent,

@@ -26,6 +26,17 @@ export class FlashcardSetEffects {
     );
   });
 
+  updateNewFlashcards$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FlashcardSetActions.updateNewFlashcards),
+      concatMap(({newFlashcard}) => {
+        return of(FlashcardSetActions.addNewFlashcardToNewFlashcardSet({
+          newFlashcard: newFlashcard
+        }))
+      })
+    );
+  });
+
   saveFlashcardSet$ = createEffect(() => {
     return this.actions$.pipe( 
 

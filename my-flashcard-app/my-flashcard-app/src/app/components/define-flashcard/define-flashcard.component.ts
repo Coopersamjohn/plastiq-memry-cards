@@ -23,7 +23,7 @@ export class DefineFlashcardComponent implements OnInit {
   ngOnInit() {}
 
   saveCard() {
-    const flashcard = this.flashcardService.mapFlashcardFormGroupToFlashCard(this.flashcard);
-    this.store.dispatch(FlashcardActions.addFlashcardToChosenFlashcardSet({flashcard}));
+    // const flashcard = this.flashcardService.mapFlashcardFormGroupToFlashCard(this.flashcard);
+    this.store.dispatch(FlashcardActions.updateNewFlashcards({ newFlashcard: this.flashcard }));
   }
 }

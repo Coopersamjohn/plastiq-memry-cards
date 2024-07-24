@@ -28,16 +28,16 @@ export class CreateFlashcardSetComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store
   ) {
-    // this.flashcardSetForm$ = this.store.pipe(select(selectNewFlashcardSet));
+    this.flashcardSetForm$ = this.store.pipe(select(selectNewFlashcardSet));
     
    }
 
   ngOnInit() {}
 
   createNewFlashcardSetFormGroup(): void {
-    this.flashcardSetForm$ = this.flashcardService.createNewFlashcardSetFormGroup();
-    // const flashcardSetFormGroup = this.flashcardService.createNewFlashcardSetFormGroup();
-    // this.store.dispatch(FlashcardActions.createNewFlashcardSetFormGroup({flashcardSetFormGroup}));
+    this.store.dispatch(FlashcardActions.createNewFlashcardSetFormGroup({
+      flashcardSetFormGroup: this.flashcardService.createNewFlashcardSetFormGroup()
+    }));
   }
 
   // newCard() {

@@ -47,7 +47,7 @@ public class FlashcardSetsController {
 
     }
 
-    @GetMapping("/by-name/${name}")
+    @GetMapping("/by-name/{name}")
     @ResponseBody
     public Mono<FlashcardSet> getFlashcardSetByName(
             @PathVariable("name") String name) {

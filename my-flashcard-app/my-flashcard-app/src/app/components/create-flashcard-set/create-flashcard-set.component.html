@@ -1,11 +1,8 @@
 <ion-button type="button" (click)="createNewFlashcardSetFormGroup()">+ New Flashcard Set</ion-button>
 
-<div *ngrxLet="flashcardSetForm$; let fcsf">
-  <div *ngIf="fcsf; else noSetYet">
-    <app-define-flashcard-set [flashcardSetForm]="fcsf"></app-define-flashcard-set>
-  </div>
-  <ng-template #noSetYet>
-    <ion-text>Soon</ion-text>
-  </ng-template>
-  
-</div>
+<app-define-flashcard-set *ngrxLet="flashcardSetForm$ as fcsf; let e = $error, let c = $complete;"></app-define-flashcard-set>
+<ng-template #noSetYet>
+  <ion-text>Soon</ion-text>
+</ng-template>
+
+

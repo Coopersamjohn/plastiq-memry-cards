@@ -51,7 +51,7 @@ public class FlashcardController {
 
 	}
 
-	@GetMapping("/existsById/{id}")
+	@GetMapping("/exists-by-id/{id}")
 	@ResponseBody
 	public Mono<Boolean> existsById(
 			@PathVariable("id") UUID id

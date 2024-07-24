@@ -1,8 +1,8 @@
 <div>
   <div *ngIf="isFront; else back">
-    <h1> {{ flashCard.name }} </h1>
+    <h1> {{ flashCard.getName }} </h1>
   </div>
   <ng-template #back>
-    <p> {{ flashCard.definition }} </p>
+    <p> {{ flashCard.getDefinition }} </p>
   </ng-template>
 </div>

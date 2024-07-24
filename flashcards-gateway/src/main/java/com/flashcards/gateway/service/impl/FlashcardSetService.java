@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -19,23 +20,44 @@ import reactor.core.publisher.Mono;
 
 @Service
 @PropertySource("classpath:application.properties")
+@CrossOrigin
 public class FlashcardSetService {
 
     private static Log log = LogFactory.getLog(FlashcardSetService.class);
 
     private WebClient webClient;
 
-    private String flashcardSetUri;
+    @Value("${flashcardSet.uri}")
+    private String host;
 
-    private String flashcardSetPort;
+    @Value("${flashcardSet.port}")
+    private String port;
+
+    @Value("${flashcardSet.path.root}")
+    private String root;
+
+    @Value("${flashcardSet.path.getAll}")
+    private String getAllSets;
+
+    @Value("${flashcardSet.path.name}")
+    private String getByName;
+
+    @Value("${flashcardSet.path.getById}")
+    private String getById;
+
+    @Value("${flashcardSet.path.create}")
+    private String create;
+
+    @Value("${flashcardSet.path.update}")
+    private String update;
+
+    @Value("${flashcardSet.path.delete}")
+    private String delete;
 
     @Autowired
-    public FlashcardSetService(
-            @Value("${flashcardSet.uri}") String flashcardSetUri,
-            @Value("${flashcardSet.port}") String flashcardSetPort
-    ) {
+    public FlashcardSetService() {
 
-        this.webClient = WebClient.builder().build();
+        this.webClient = WebClient.create();
 
     }
 
@@ -44,7 +66,13 @@ public class FlashcardSetService {
         log.info("Create FlashcardSet Service :: " + flashcardSet);
 
         return this.webClient.post()
-                .uri("http://localhost:9677/flashcard-sets/create-this-flashcard-set")
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(this.host)
+                        .port(this.port)
+                        .path(this.root)
+                        .path(this.create)
+                        .build())
                 .bodyValue(flashcardSet)
                 .retrieve()
                 .bodyToMono(FlashcardSet.class);
@@ -66,7 +94,13 @@ public class FlashcardSetService {
         };
 
         return webClient.get()
-                .uri("http://localhost:9677/flashcard-sets/get-all")
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(this.host)
+                        .port(this.port)
+                        .path(this.root)
+                        .path(this.getAllSets)
+                        .build())
                 .retrieve().bodyToFlux(FlashcardSet.class);
 
     }
@@ -74,10 +108,14 @@ public class FlashcardSetService {
     public Mono<FlashcardSet> getFlashcardSetByName(String name) {
 
         return webClient.get()
-                .uri((uriBuilder) -> uriBuilder
-                        .host("http://localhost:9677/flashcard-sets")
-                        .path("/get-by-name/" + name)
-                        .build(name))
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(this.host)
+                        .port(this.port)
+                        .path(this.root)
+                        .path(this.getByName)
+                        .path( "/" + name)
+                        .build())
                 .exchangeToMono((res) -> res.bodyToMono(FlashcardSet.class));
 
     }
@@ -85,7 +123,13 @@ public class FlashcardSetService {
     public Mono<FlashcardSet> updateFlashcardSet(FlashcardSet flashcardSet) {
 
         return this.webClient.put()
-                .uri("http://localhost:9677/flashcard-sets")
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(this.host)
+                        .port(this.port)
+                        .path(this.root)
+                        .path(this.update)
+                        .build())
                 .body(BodyInserters.fromValue(flashcardSet))
                 .exchangeToMono(res -> res.bodyToMono(FlashcardSet.class));
 
@@ -95,9 +139,13 @@ public class FlashcardSetService {
 
         return this.webClient.delete()
                 .uri(uriBuilder -> uriBuilder
-                        .host("http://localhost:9677/flashcard-sets")
-                        .path("/delete-this-flashcard-set/{flashcardSetId}")
-                        .build(flashcardSet.getId().toString()))
+                        .scheme("http")
+                        .host(this.host)
+                        .port(this.port)
+                        .path(this.root)
+                        .path(this.delete)
+                        .path( "/" + flashcardSet.getId())
+                        .build())
                 .exchangeToMono(res -> res.bodyToMono(FlashcardSet.class));
 
     }

@@ -51,6 +51,11 @@ export const addFlashcardToChosenFlashcardSet = createAction(
   props<{ flashcard: Flashcard }>()
 );
 
+export const addNewFlashcardToNewFlashcardSet = createAction(
+  '[FlashcardSet] Add NewFlashcard to NewFlashcardSet',
+  props<{ newFlashcard: FormGroup }>()
+);
+
 export const addFlashcardToFlashcardSet = createAction(
   '[FlashcardSet] Add Flashcard to FlashcardSet',
   props<{ 
@@ -91,9 +96,9 @@ export const createNewFlashcardsFormArray = createAction(
   props<{ flashcardSetFormArray: FormArray }>()
 );
 
-export const updateNewFlashcardsFormArray = createAction(
-  '[FlashcardSet] Update New FlashcardSet FormArray',
-  props<{ flashcardSetFormArray: FormArray }>()
+export const updateNewFlashcards = createAction(
+  '[FlashcardSet] Update NewFlashcards',
+  props<{ newFlashcard: FormGroup }>()
 );
 
 export const clearNewFlashcardsFormArray = createAction(

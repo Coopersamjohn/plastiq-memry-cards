@@ -1,4 +1,4 @@
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Action, createReducer, on } from '@ngrx/store';
 import { FlashcardSet } from 'src/app/models/flashcard-set/flashcard-set';
 import { FlashcardSetState } from './flashcard-set-state';
@@ -12,8 +12,12 @@ export const initialState: FlashcardSetState = {
   isLoading: false,
   errors: [],
   newFlashcardSet: null,
-  newFlashcards: null,
-  newFlashcard: null
+  newFlashcards: new FormArray([]),
+  newFlashcard: new FormGroup({
+    name: new FormControl(''),
+    definition: new FormControl(''),
+    notes: new FormControl('')
+  })
 };
 
 export const flashcardSetReducer = createReducer(
@@ -84,6 +88,16 @@ export const flashcardSetReducer = createReducer(
     ...state,
     newFlashcardSet: action.flashcardSetFormGroup
   })),
+  on(FlashcardSetActions.addNewFlashcardToNewFlashcardSet, (state, action) => ({
+    ...state,
+    newFlashcardSet: new FormGroup({
+      name: state.newFlashcardSet.get("name"),
+      cards: new FormArray([
+        ...state.newFlashcardSet.get("cards").value,
+        action.newFlashcard
+      ])
+    })
+  })),
   on(FlashcardSetActions.clearNewFlashcardSetFormGroup, (state) => ({
     ...state,
     newFlashcardSet: null
@@ -94,9 +108,12 @@ export const flashcardSetReducer = createReducer(
     ...state,
     newFlashcards: action.flashcardSetFormArray
   })),
-  on(FlashcardSetActions.updateNewFlashcardsFormArray, (state, action) => ({
+  on(FlashcardSetActions.updateNewFlashcards, (state, action) => ({
     ...state,
-    newFlashcards: action.flashcardSetFormArray
+    newFlashcards: new FormArray([
+      ...state.newFlashcards.controls, 
+      action.newFlashcard
+    ])
   })),
   on(FlashcardSetActions.clearNewFlashcardsFormArray, (state) => ({
     ...state,

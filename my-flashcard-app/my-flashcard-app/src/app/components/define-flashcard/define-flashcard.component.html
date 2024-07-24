@@ -1,4 +1,4 @@
-<form id="flashcard-{{ i }}" [formGroup]="flashcard" (submit)="saveCard()">
+<form [formGroup]="flashcard" (ngSubmit)="saveCard()">
 
   <label for="name">Name:</label>
   <input id="name" type="text" formControlName="name">
