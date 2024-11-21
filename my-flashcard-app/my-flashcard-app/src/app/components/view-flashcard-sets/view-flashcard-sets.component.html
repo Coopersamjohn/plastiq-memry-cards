@@ -1,10 +1,10 @@
-<!-- <ion-header> -->
+ <ion-header>
   <h1>Categories</h1>
-<!-- </ion-header>
-<ion-content> -->
-  <div *ngrxLet="flashCardSets$ as sets; let e = $error, let c = $complete">
+ </ion-header>
+<ion-content>
+  <div *ngrxLet="flashCardSets$ as sets; let e = $error;">
 
-    <div *ngIf="sets.length > 0 && !e && !c; else noSets">
+    <div *ngIf="sets.length > 0 && !e; else noSets">
       <div *ngFor="let flashcardSet of sets">
 
         <ion-card>
@@ -14,7 +14,7 @@
           </div>
           <app-create-flashcard></app-create-flashcard>
         </ion-card>
-    
+
       </div>
     </div>
 
@@ -25,15 +25,10 @@
         </ion-text>
       </ion-card>
     </ng-template>
-
-    <ng-container *ngIf="e">
-      <ion-text> Some Error:: {{ e }} </ion-text>
-    </ng-container>
-
-    <!-- <ng-container *ngIf="c">
-      <ion-text> Call complete:: {{ c }} </ion-text>
-    </ng-container> -->
-
   </div>
 
-<!-- </ion-content> -->
+  <ng-container *ngIf="e">
+    <ion-text> Some Error:: {{ e }} </ion-text>
+  </ng-container>
+
+ </ion-content>

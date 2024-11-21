@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class Flashcard implements Serializable, Comparable<Flashcard> {
 
         } else {
 
-            new Builder()
+            new FlashcardBuilder()
                     .id(id)
                     .setIds(setIds)
                     .name(name)
@@ -59,7 +60,7 @@ public class Flashcard implements Serializable, Comparable<Flashcard> {
     }
 
     public Flashcard(
-            Flashcard.Builder flashcardBuilder
+            Flashcard.FlashcardBuilder flashcardBuilder
     ) {
 
         super();
@@ -73,7 +74,7 @@ public class Flashcard implements Serializable, Comparable<Flashcard> {
 
     public static Flashcard generateId(ArrayList<UUID> setIds, String name, String definition, String notes) {
 
-        return new Builder()
+        return new FlashcardBuilder()
                 .id(UUID.randomUUID())
                 .setIds(setIds)
                 .name(name)
@@ -124,7 +125,7 @@ public class Flashcard implements Serializable, Comparable<Flashcard> {
 
     public static Flashcard cardWithId(UUID id, String name, String definition) {
 
-        return new Builder()
+        return new FlashcardBuilder()
                 .id(id)
                 .name(name)
                 .definition(definition)
@@ -214,37 +215,43 @@ public class Flashcard implements Serializable, Comparable<Flashcard> {
 
     @Override
     public int compareTo(@NotNull Flashcard o) {
-        return this.getName().compareTo(o.getName());
+        return Comparator.comparing(Flashcard::getName)
+                .thenComparing(Flashcard::getId)
+                .compare(this, o);
     }
 
-    public static class Builder {
+    public static class FlashcardBuilder {
         private UUID id;
         private ArrayList<UUID> setIds;
         private String name;
         private String definition;
         private String notes;
 
-        public Builder id(UUID id) {
+        public FlashcardBuilder FlashcardBuilder() {
+            return this;
+        };
+
+        public FlashcardBuilder id(UUID id) {
             this.id = id;
             return this;
         }
 
-        public Builder setIds(ArrayList<UUID> setIds) {
+        public FlashcardBuilder setIds(ArrayList<UUID> setIds) {
             this.setIds = setIds;
             return this;
         }
 
-        public Builder name(String name) {
+        public FlashcardBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder definition(String definition) {
+        public FlashcardBuilder definition(String definition) {
             this.definition = definition;
             return this;
         }
 
-        public Builder notes(String notes) {
+        public FlashcardBuilder notes(String notes) {
             this.notes = notes;
             return this;
         }

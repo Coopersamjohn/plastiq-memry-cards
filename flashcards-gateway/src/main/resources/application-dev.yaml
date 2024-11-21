@@ -25,6 +25,7 @@ flashcardSet:
     create: /create-this-flashcard-set
     update: /update-this-flashcard-set
     delete: /delete-this-flashcard-set
+    deleteById: /delete-flashcard-set-by-id
 flashcard:
   uri: flashcard-service
   host: localhost

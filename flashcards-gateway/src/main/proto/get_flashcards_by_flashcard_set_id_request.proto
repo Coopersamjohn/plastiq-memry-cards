@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto;
+
+option java_multiple_files = true;
+option java_package = "com.flashcards.gateway.proto";
+option java_outer_classname = "GetFlashcardsByFlashcardSetIdRequestProto";
+
+message GetFlashcardsByFlashcardSetIdRequest {
+
+  string flashcardSetId = 1;
+
+}

@@ -4,9 +4,7 @@ import com.flashcards.gateway.models.dto.FlashcardDto;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
 
@@ -14,7 +12,7 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
 
     private UUID id;
     private String name;
-    private HashSet<Flashcard> flashcards;
+    private List<Flashcard> flashcards;
     private String description;
 
 //    private Category category;
@@ -24,7 +22,7 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
             UUID flashcardSetId,
             String flashcardSetName,
             String flashcardSetDescription,
-            HashSet<Flashcard> flashcards
+            List<Flashcard> flashcards
     ) {
         if (flashcardSetId == null) {
             if (flashcards == null) {
@@ -50,7 +48,7 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
     public static FlashcardSet generateUUID(
             String name,
             String description,
-            HashSet<Flashcard> flashcards
+            List<Flashcard> flashcards
     ) {
         return new FlashcardSetBuilder()
                 .id(UUID.randomUUID())
@@ -67,13 +65,13 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
         return FlashcardSet.generateUUID(
                 name,
                 description,
-                new HashSet<Flashcard>()
+                new ArrayList<Flashcard>()
         );
     }
 
     public static FlashcardSet withCardsNoDescription(
             String name,
-            HashSet<Flashcard> flashcards
+            List<Flashcard> flashcards
     ) {
         return FlashcardSet.generateUUID(
                 name,
@@ -90,7 +88,7 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
         return this.name;
     }
 
-    public HashSet<Flashcard> getFlashcards() {
+    public List<Flashcard> getFlashcards() {
         return this.flashcards;
     }
 
@@ -126,14 +124,16 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
 
     @Override
     public int compareTo(@NotNull FlashcardSet o) {
-        return this.getName().compareTo(o.getName());
+        return Comparator.comparing(FlashcardSet::getName)
+                .thenComparing(FlashcardSet::getId)
+                .compare(this, o);
     }
 
     public static class FlashcardSetBuilder {
 
         private UUID id;
         private String name;
-        private HashSet<Flashcard> flashcards;
+        private List<Flashcard> flashcards;
         private String description;
 
         public FlashcardSetBuilder id(UUID id) {
@@ -146,7 +146,7 @@ public class FlashcardSet implements Serializable, Comparable<FlashcardSet> {
             return this;
         }
 
-        public FlashcardSetBuilder flashcards(HashSet<Flashcard> flashcards) {
+        public FlashcardSetBuilder flashcards(List<Flashcard> flashcards) {
             this.flashcards = flashcards;
             return this;
         }

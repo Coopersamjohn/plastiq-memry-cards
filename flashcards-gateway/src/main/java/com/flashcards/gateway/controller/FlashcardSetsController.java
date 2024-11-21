@@ -30,7 +30,8 @@ public class FlashcardSetsController {
     @PostMapping("/create")
     @ResponseBody
     public Mono<FlashcardSet> createFlashcardSet(
-            @RequestBody FlashcardSet flashcardSet) {
+            @RequestBody FlashcardSet flashcardSet
+    ) {
 
         log.info("Create this FlashcardSet :: " + flashcardSet);
 
@@ -50,7 +51,8 @@ public class FlashcardSetsController {
     @GetMapping("/by-name/{name}")
     @ResponseBody
     public Mono<FlashcardSet> getFlashcardSetByName(
-            @PathVariable("name") String name) {
+            @PathVariable("name") String name
+    ) {
 
         log.info("Get this FlashcardSet by name :: " + name);
 
@@ -61,7 +63,8 @@ public class FlashcardSetsController {
     @PutMapping("/update")
     @ResponseBody
     public Mono<FlashcardSet> updateFlashcardSet(
-            @RequestBody FlashcardSet flashcardSet) {
+            @RequestBody FlashcardSet flashcardSet
+    ) {
 
         log.info("Update this FlashcardSet :: " + flashcardSet);
 
@@ -71,8 +74,9 @@ public class FlashcardSetsController {
 
     @DeleteMapping("/delete")
     @ResponseBody
-    public Mono<FlashcardSet> deleteFlashcardSet(
-            @RequestBody FlashcardSet flashcardSet) {
+    public Mono<Boolean> deleteFlashcardSet(
+            @RequestBody FlashcardSet flashcardSet
+    ) {
 
         log.info("Delete this FlashcardSet :: " + flashcardSet);
 

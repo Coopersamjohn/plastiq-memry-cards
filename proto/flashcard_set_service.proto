@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package proto;
+
+import "create_flashcard_set_request.proto";
+import "create_flashcard_set_response.proto";
+import "get_flashcard_sets_request.proto";
+import "get_flashcard_sets_response.proto";
+import "get_flashcard_set_by_name_request.proto";
+import "get_flashcard_set_by_name_response.proto";
+import "get_flashcard_set_by_id_request.proto";
+import "get_flashcard_set_by_id_response.proto";
+import "update_flashcard_set_request.proto";
+import "update_flashcard_set_response.proto";
+import "delete_flashcard_set_request.proto";
+import "delete_flashcard_set_response.proto";
+
+option java_multiple_files = true;
+option java_package = "com.flashcards.gateway.proto";
+option java_outer_classname = "FlashcardSetServiceProto";
+
+service FlashcardSetService {
+
+  rpc CreateFlashcardSet(CreateFlashcardSetRequest) returns (CreateFlashcardSetResponse);
+  rpc GetFlashcardSets(GetFlashcardSetsRequest) returns (GetFlashcardSetsResponse);
+  rpc GetFlashcardSetByName(GetFlashcardSetByNameRequest) returns (GetFlashcardSetByNameResponse);
+  rpc GetFlashcardSetById(GetFlashcardSetByIdRequest) returns (GetFlashcardSetByIdResponse);
+  rpc UpdateFlashcardSet(UpdateFlashcardSetRequest) returns (UpdateFlashcardSetResponse);
+  rpc DeleteFlashcardSet(DeleteFlashcardSetRequest) returns (DeleteFlashcardSetResponse);
+
+}

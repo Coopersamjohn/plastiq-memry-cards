@@ -4,7 +4,9 @@ import com.flashcards.gateway.models.FlashcardSet;
 
 import java.lang.reflect.Type;
 import java.util.LinkedHashSet;
+import java.util.UUID;
 
+import com.flashcards.gateway.proto.FlashcardSetServiceGrpc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import reactor.core.publisher.Mono;
 @Service
 @PropertySource("classpath:application.properties")
 @CrossOrigin
-public class FlashcardSetService {
+public class FlashcardSetService extends FlashcardSetServiceGrpc.FlashcardSetServiceImplBase {
 
     private static Log log = LogFactory.getLog(FlashcardSetService.class);
 
@@ -54,13 +56,16 @@ public class FlashcardSetService {
     @Value("${flashcardSet.path.delete}")
     private String delete;
 
+    @Value("${flashcardSet.path.deleteById}")
+    private String deleteById;
+
     @Autowired
     public FlashcardSetService() {
 
         this.webClient = WebClient.create();
 
     }
-
+    
     public Mono<FlashcardSet> createFlashcardSet(FlashcardSet flashcardSet) {
 
         log.info("Create FlashcardSet Service :: " + flashcardSet);
@@ -135,7 +140,7 @@ public class FlashcardSetService {
 
     }
 
-    public Mono<FlashcardSet> deleteFlashcardSet(FlashcardSet flashcardSet) {
+    public Mono<Boolean> deleteFlashcardSet(FlashcardSet flashcardSet) {
 
         return this.webClient.delete()
                 .uri(uriBuilder -> uriBuilder
@@ -146,7 +151,22 @@ public class FlashcardSetService {
                         .path(this.delete)
                         .path( "/" + flashcardSet.getId())
                         .build())
-                .exchangeToMono(res -> res.bodyToMono(FlashcardSet.class));
+                .exchangeToMono(res -> res.bodyToMono(Boolean.class));
+
+    }
+
+    public Mono<Boolean> deleteFlashcardSetById(UUID flashcardSetId) {
+
+        return this.webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(this.host)
+                        .port(this.port)
+                        .path(this.root)
+                        .path(this.deleteById)
+                        .path( "/" + flashcardSetId)
+                        .build())
+                .exchangeToMono(res -> res.bodyToMono(Boolean.class));
 
     }
 

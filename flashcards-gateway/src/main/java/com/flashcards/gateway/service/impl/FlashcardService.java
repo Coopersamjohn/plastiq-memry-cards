@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.UUID;
 
 @Service
 @CrossOrigin
@@ -52,7 +53,7 @@ public class FlashcardService {
     private String getByFlashcardSetId;
 
     @Value("${flashcard.path.save}")
-    private String save;
+    private String create;
 
     @Value("${flashcard.path.saveCards}")
     private String saveCards;
@@ -82,14 +83,14 @@ public class FlashcardService {
     }
 
     public Mono<Flashcard> createFlashcard(Flashcard flashcard) {
-
+        log.info(host + port + root + create);
         return this.webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host(host)
                         .port(port)
                         .path(root)
-                        .path(save)
+                        .path(create)
                         .build())
                 .bodyValue(flashcard)
                 .retrieve()
@@ -98,7 +99,6 @@ public class FlashcardService {
     }
 
     public Flux<Flashcard> getFlashcards() {
-//        "http://localhost:9678/flashcards/get-all"
         log.info(host + port + root + getAll);
         return this.webClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -112,15 +112,30 @@ public class FlashcardService {
 
     }
 
-    public Mono<Flashcard> getFlashcardByName(String name) {
-        log.info(host + port + root + name);
+    public Flux<Flashcard> getFlashcardsByFlashcardSetId(UUID flashcardSetId) {
+        log.info(host + port + root + this.getByFlashcardSetId + flashcardSetId);
         return this.webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host(host)
                         .port(port)
                         .path(root)
-                        .path(name)
+                        .path(getByFlashcardSetId)
+                        .path("/" + flashcardSetId.toString())
+                        .build())
+                .retrieve().bodyToFlux(Flashcard.class);
+
+    }
+
+    public Mono<Flashcard> getFlashcardByName(String name) {
+        log.info(host + port + root + this.name + name);
+        return this.webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(this.name)
                         .path("/" + name)
                         .build())
                 .retrieve().bodyToMono(Flashcard.class);
@@ -128,7 +143,7 @@ public class FlashcardService {
     }
 
     public Mono<Flashcard> getFlashcardById(String id) {
-        log.info(host + port + root + getById);
+        log.info(host + port + root + getById + id);
         return this.webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
@@ -142,8 +157,23 @@ public class FlashcardService {
 
     }
 
+    public Flux<Flashcard> getFlashcardByIds(String[] ids) {
+        log.info(host + port + root + getById + ids);
+        return this.webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(getByIds)
+                        .path("/" + ids)
+                        .build())
+                .retrieve().bodyToFlux(Flashcard.class);
+
+    }
+
     public Mono<Flashcard> updateFlashcard(Flashcard flashcard) {
-        log.info(host + port + root + update);
+        log.info(host + port + root + update + flashcard.getId());
         return this.webClient.put()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
@@ -157,8 +187,53 @@ public class FlashcardService {
 
     }
 
-    public Mono<Flashcard> deleteFlashcard(Flashcard flashcard) {
+    public Mono<Flashcard> saveFlashcards(Flashcard[] flashcards) {
+        log.info(host + port + root + saveCards + flashcards.toString());
+        return this.webClient.put()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(saveCards)
+                        .build())
+                .body(BodyInserters.fromValue(flashcards))
+                .exchangeToMono((res) -> res.bodyToMono(Flashcard.class));
 
+    }
+
+    public Mono<Boolean> deleteFlashcard(Flashcard flashcard) {
+        log.info(host + port + root + delete + flashcard.getId() );
+        return this.webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(delete)
+                        .path( "/" + flashcard.getId())
+                        .build())
+                .exchangeToMono(res -> res.bodyToMono(Boolean.class));
+
+    }
+
+    public Mono<Boolean> deleteFlashcards(Flashcard[] flashcards) {
+        log.info(host + port + root + deleteThese + flashcards.toString());
+        return this.webClient.put()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(deleteThese)
+                        .build())
+                .body(BodyInserters.fromValue(flashcards))
+                .exchangeToMono((res) -> res.bodyToMono(Boolean.class));
+
+    }
+
+    public Mono<Boolean> deleteFlashcardById(UUID flashcardId) {
+        log.info(host + port + root + deleteById + flashcardId );
         return this.webClient.delete()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
@@ -166,9 +241,39 @@ public class FlashcardService {
                         .port(port)
                         .path(root)
                         .path(deleteById)
-                        .path( "/" + flashcard.getId())
+                        .path( "/" + flashcardId)
                         .build())
-                .exchangeToMono(res -> res.bodyToMono(Flashcard.class));
+                .exchangeToMono(res -> res.bodyToMono(Boolean.class));
+
+    }
+
+    public Mono<Boolean> deleteFlashcardsByIds(UUID[] flashcardIds) {
+        log.info(host + port + root + deleteTheseIds + flashcardIds );
+        return this.webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(deleteTheseIds)
+                        .path( "/" + flashcardIds.toString())
+                        .build())
+                .exchangeToMono(res -> res.bodyToMono(Boolean.class));
+
+    }
+
+    public Mono<Boolean> deleteFlashcardByName(String flashcardName) {
+        log.info(host + port + root + deleteByName + flashcardName );
+        return this.webClient.delete()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(host)
+                        .port(port)
+                        .path(root)
+                        .path(deleteByName)
+                        .path( "/" + flashcardName)
+                        .build())
+                .exchangeToMono(res -> res.bodyToMono(Boolean.class));
 
     }
 

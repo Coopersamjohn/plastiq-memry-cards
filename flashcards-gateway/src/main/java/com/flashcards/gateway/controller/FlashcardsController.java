@@ -99,7 +99,7 @@ public class FlashcardsController {
 
     @DeleteMapping("/delete")
     @ResponseBody
-    public Mono<Flashcard> deleteFlashcard(
+    public Mono<Boolean> deleteFlashcard(
             @RequestBody Flashcard flashcard) {
 
         log.info("Delete this Flashcard :: " + flashcard);

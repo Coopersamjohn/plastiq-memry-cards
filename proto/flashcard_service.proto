@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package proto;
+
+import "create_flashcard_request.proto";
+import "create_flashcard_response.proto";
+import "get_flashcards_request.proto";
+import "get_flashcards_response.proto";
+import "get_flashcards_by_flashcard_set_id_request.proto";
+import "get_flashcards_by_flashcard_set_id_response.proto";
+import "get_flashcard_by_name_request.proto";
+import "get_flashcard_by_name_response.proto";
+import "get_flashcard_by_id_request.proto";
+import "get_flashcard_by_id_response.proto";
+import "update_flashcard_request.proto";
+import "update_flashcard_response.proto";
+import "delete_flashcard_request.proto";
+import "delete_flashcard_response.proto";
+
+option java_multiple_files = true;
+option java_package = "com.flashcards.gateway.proto";
+option java_outer_classname = "FlashcardServiceProto";
+
+service FlashcardService {
+
+  rpc CreateFlashcard(CreateFlashcardRequest) returns (CreateFlashcardResponse);
+  rpc GetFlashcards(GetFlashcardsRequest) returns (GetFlashcardsResponse);
+  rpc GetFlashcardsByFlashcardSetId(GetFlashcardsByFlashcardSetIdRequest) returns (GetFlashcardsByFlashcardSetIdResponse);
+  rpc GetFlashcardByName(GetFlashcardByNameRequest) returns (GetFlashcardByNameResponse);
+  rpc GetFlashcardById(GetFlashcardByIdRequest) returns (GetFlashcardByIdResponse);
+  rpc UpdateFlashcard(UpdateFlashcardRequest) returns (UpdateFlashcardResponse);
+  rpc DeleteFlashcard(DeleteFlashcardRequest) returns (DeleteFlashcardResponse);
+
+}
