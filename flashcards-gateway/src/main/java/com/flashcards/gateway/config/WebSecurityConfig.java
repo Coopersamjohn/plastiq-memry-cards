@@ -28,7 +28,7 @@ public class WebSecurityConfig {
             CorsConfigurationSource corsConfigurationSource
     ) {
         Customizer<ServerHttpSecurity.CsrfSpec> csrfSpecCustomizer = csrfSpec -> csrfSpec
-                .requireCsrfProtectionMatcher((ServerWebExchangeMatcher) ServerWebExchangeMatcher.MatchResult.match())
+//                .requireCsrfProtectionMatcher((ServerWebExchangeMatcher) ServerWebExchangeMatcher.MatchResult.match())
                 .csrfTokenRepository(new WebSessionServerCsrfTokenRepository())
                 .accessDeniedHandler(new ServerWebExchangeDelegatingServerAccessDeniedHandler())
                 .csrfTokenRequestHandler(new ServerCsrfTokenRequestAttributeHandler()).disable();
