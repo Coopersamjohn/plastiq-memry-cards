@@ -7,7 +7,7 @@ import { selectFlashcardSets } from 'src/app/state/flashcard-set/flashcard-set.s
 import { IonicModule } from "@ionic/angular";
 import { FlashcardComponent } from '../flashcard/flashcard.component';
 import { CreateFlashcardComponent } from '../create-flashcard/create-flashcard.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     IonicModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     FlashcardComponent,
     CreateFlashcardComponent
   ],
