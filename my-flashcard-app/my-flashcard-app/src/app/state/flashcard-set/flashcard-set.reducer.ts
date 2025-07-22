@@ -6,17 +6,22 @@ import * as FlashcardSetActions from './flashcard-set.actions';
 
 export const flashcardSetFeatureKey = 'flashcardSets';
 
+export interface FlashcardForm {
+  name: FormControl<string>;
+  definition: FormControl<string>;
+  notes: FormControl<string>;
+}
 export const initialState: FlashcardSetState = {
   flashcardSets: [],
   currentFlashcardSet: null,
   isLoading: false,
   errors: [],
   newFlashcardSet: null,
-  newFlashcards: new FormArray([]),
-  newFlashcard: new FormGroup({
-    name: new FormControl(''),
-    definition: new FormControl(''),
-    notes: new FormControl('')
+  newFlashcards: new FormArray<FormGroup>([]),
+  newFlashcard: new FormGroup<FlashcardForm>({
+    name: new FormControl<string | null>(''),
+    definition: new FormControl<string | null>(''),
+    notes: new FormControl<string | null>('')
   })
 };
 
