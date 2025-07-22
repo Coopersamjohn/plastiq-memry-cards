@@ -56,9 +56,9 @@ export class FlashcardSetEffects {
   });
 
   constructor(
-    private actions$: Actions,
-    private flashcardService: FlashCardService,
-    private store: Store
+    private readonly actions$: Actions,
+    private readonly flashcardService: FlashCardService,
+    private readonly store: Store
   ) {}
 
 }

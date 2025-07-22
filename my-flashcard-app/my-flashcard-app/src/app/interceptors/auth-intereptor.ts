@@ -6,7 +6,7 @@ import { flashcardServiceHostname, flashcardServicePort, hostname, port } from "
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  private httpResp: HttpResponse<any>;
+  private readonly httpResp: HttpResponse<any>;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // let csrfToken = this.tokenExtractor.getToken();
