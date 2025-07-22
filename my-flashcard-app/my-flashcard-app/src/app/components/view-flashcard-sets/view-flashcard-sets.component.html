@@ -25,10 +25,12 @@
         </ion-text>
       </ion-card>
     </ng-template>
+
+    <ng-container *ngIf="e">
+      <ion-text> Some Error:: {{ e }} </ion-text>
+    </ng-container>
   </div>
 
-  <ng-container *ngIf="e">
-    <ion-text> Some Error:: {{ e }} </ion-text>
-  </ng-container>
+
 
  </ion-content>

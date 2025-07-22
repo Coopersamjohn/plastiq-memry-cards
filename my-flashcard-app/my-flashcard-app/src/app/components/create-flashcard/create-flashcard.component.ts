@@ -18,9 +18,9 @@ export class CreateFlashcardComponent implements OnInit {
   flashcard$: Observable<FormGroup>;
 
   constructor(
-    private flashcardService: FlashCardService,
-    private fb: FormBuilder,
-    private store: Store
+    private readonly flashcardService: FlashCardService,
+    private readonly fb: FormBuilder,
+    private readonly store: Store
   ) { 
     this.flashcard$ = this.store.select(selectNewFlashcard);
   }

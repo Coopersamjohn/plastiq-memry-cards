@@ -11,13 +11,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FlashCardService {
 
-  private flashcardServiceUrl: string = `http://${flashcardServiceHostname}:${flashcardServicePort}`;
-  private getAllFlashcards: string = "/getAll";
-  private saveFlashcardSet: string = "/saveFlashcardSet";
+  private readonly flashcardServiceUrl: string = `http://${flashcardServiceHostname}:${flashcardServicePort}`;
+  private readonly getAllFlashcards: string = "/getAll";
+  private readonly saveFlashcardSet: string = "/saveFlashcardSet";
 
   constructor(
-    private httpClient: HttpClient,
-    private fb: FormBuilder
+    private readonly httpClient: HttpClient,
+    private readonly fb: FormBuilder
   ) { }
 
   getAllFlashCardSets(): Observable<FlashcardSet[]> {

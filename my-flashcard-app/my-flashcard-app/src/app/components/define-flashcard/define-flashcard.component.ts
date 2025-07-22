@@ -16,8 +16,8 @@ export class DefineFlashcardComponent implements OnInit {
   @Input() flashcard: FormGroup;
 
   constructor(
-    private flashcardService: FlashCardService,
-    private store: Store
+    private readonly flashcardService: FlashCardService,
+    private readonly store: Store
   ) { }
 
   ngOnInit() {}

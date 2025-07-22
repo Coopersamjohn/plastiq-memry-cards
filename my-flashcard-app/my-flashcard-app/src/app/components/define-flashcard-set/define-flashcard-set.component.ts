@@ -17,8 +17,8 @@ export class DefineFlashcardSetComponent implements OnInit {
   flashcardSetForm$: Observable<FormGroup>;
 
   constructor(
-    private store: Store,
-    private flashcardService: FlashCardService,
+    private readonly store: Store,
+    private readonly flashcardService: FlashCardService,
   ) { 
     this.flashcardSetForm$ = this.store.select(selectNewFlashcard);
   }

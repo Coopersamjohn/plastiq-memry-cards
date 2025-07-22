@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { ViewFlashcardSetsComponent } from '../components/view-flashcard-sets/view-flashcard-sets.component';
 import { ComponentsModule } from '../components/components.module';
 
 
@@ -15,10 +14,9 @@ import { ComponentsModule } from '../components/components.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    HomePage
   ],
-  declarations: [
-    HomePage,
-  ]
+  declarations: []
 })
 export class HomePageModule {}

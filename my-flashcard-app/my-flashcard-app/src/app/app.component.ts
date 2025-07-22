@@ -9,7 +9,7 @@ import { FlashCardService } from './services/flash-card-service/flash-card.servi
 })
 export class AppComponent implements OnInit {
   constructor(
-    private flashCardService: FlashCardService,
+    private readonly flashCardService: FlashCardService,
   ) {}
 
   ngOnInit(): void {

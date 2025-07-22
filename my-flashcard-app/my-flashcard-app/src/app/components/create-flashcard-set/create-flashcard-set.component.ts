@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -24,9 +24,9 @@ export class CreateFlashcardSetComponent implements OnInit {
   // }
 
   constructor(
-    private flashcardService: FlashCardService,
-    private fb: FormBuilder,
-    private store: Store
+    private readonly flashcardService: FlashCardService,
+    private readonly fb: FormBuilder,
+    private readonly store: Store
   ) {
     this.flashcardSetForm$ = this.store.pipe(select(selectNewFlashcardSet));
     
