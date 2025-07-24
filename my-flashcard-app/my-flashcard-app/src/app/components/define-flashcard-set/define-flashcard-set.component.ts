@@ -8,9 +8,9 @@ import * as FlashcardActions from 'src/app/state/flashcard-set/flashcard-set.act
 import { selectFlashcardSetState, selectNewFlashcard } from 'src/app/state/flashcard-set/flashcard-set.selectors';
 
 @Component({
-  selector: 'app-define-flashcard-set',
-  templateUrl: './define-flashcard-set.component.html',
-  styleUrls: ['./define-flashcard-set.component.scss'],
+    selector: 'app-define-flashcard-set',
+    templateUrl: './define-flashcard-set.component.html',
+    styleUrls: ['./define-flashcard-set.component.scss']
 })
 export class DefineFlashcardSetComponent implements OnInit {
 

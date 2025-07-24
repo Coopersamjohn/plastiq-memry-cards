@@ -13,19 +13,18 @@ import { ViewFlashcardSetsComponent } from '../components/view-flashcard-sets/vi
 import { CreateFlashcardSetComponent } from '../components/create-flashcard-set/create-flashcard-set.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    ViewFlashcardSetsComponent,
-    CreateFlashcardSetComponent
-  ]
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        ViewFlashcardSetsComponent,
+        CreateFlashcardSetComponent
+    ]
 })
 export class HomePage {
 

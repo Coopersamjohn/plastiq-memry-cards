@@ -9,9 +9,8 @@ describe('ViewFlashcardSetsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewFlashcardSetsComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    imports: [IonicModule.forRoot(), ViewFlashcardSetsComponent]
+}).compileComponents();
 
     fixture = TestBed.createComponent(ViewFlashcardSetsComponent);
     component = fixture.componentInstance;

@@ -11,18 +11,18 @@ import { LetDirective, PushPipe } from '@ngrx/component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-view-flashcard-sets',
-  templateUrl: './view-flashcard-sets.component.html',
-  styleUrls: ['./view-flashcard-sets.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    IonicModule,
-    LetDirective, PushPipe,
-    FlashcardComponent,
-    CreateFlashcardComponent
-  ],
-  standalone: true
+    selector: 'app-view-flashcard-sets',
+    templateUrl: './view-flashcard-sets.component.html',
+    styleUrls: ['./view-flashcard-sets.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        IonicModule,
+        LetDirective, 
+        PushPipe,
+        FlashcardComponent,
+        CreateFlashcardComponent
+    ]
 })
 export class ViewFlashcardSetsComponent implements OnInit {
 

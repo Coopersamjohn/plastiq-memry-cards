@@ -9,9 +9,9 @@ describe('FlashcardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlashcardComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    declarations: [FlashcardComponent],
+    imports: [IonicModule.forRoot()]
+}).compileComponents();
 
     fixture = TestBed.createComponent(FlashcardComponent);
     component = fixture.componentInstance;

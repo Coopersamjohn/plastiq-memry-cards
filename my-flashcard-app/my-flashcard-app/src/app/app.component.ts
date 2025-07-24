@@ -7,11 +7,10 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     IonRouterOutlet,
     IonApp
-],
+  ]
 })
 export class AppComponent {
   constructor(
